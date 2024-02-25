@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First Puzzle Page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+      .full-height {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 full-height p-5">
+          <ul id="menu">
+            <li><a href="first_puzzle.html">First Puzzle</a></li>
+            <li><a href="second_puzzle.html">Second Puzzle</a></li>
+          </ul>
+        </div>
+        <div id="puzzle-container" class="col-9 full-height p-5">
+          <div class="row">
+            <div class="col">
+              <div class="btn-group d-flex justify-content-between">
+                <button id="up" class="btn btn-primary mr-3 ml-3">Up</button>
+                <button id="down" class="btn btn-primary mr-3 ml-3">
+                  Down
+                </button>
+                <button id="left" class="btn btn-primary mr-3 ml-3">
+                  Left
+                </button>
+                <button id="right" class="btn btn-primary mr-3 ml-3">
+                  Right
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div id="puzzle-container" class="col-12 full-height p-5">
+              <img class="puzzle-piece" id="piece1" src="img/1.jpg" />
+              <img class="puzzle-piece" id="piece2" src="img/2.jpg" />
+              <img class="puzzle-piece" id="piece3" src="img/3.jpg" />
+              <img class="puzzle-piece" id="piece4" src="img/4.jpg" />
+              <img class="puzzle-piece" id="piece5" src="img/5.jpg" />
+              <img class="puzzle-piece" id="piece6" src="img/6.jpg" />
+              <img class="puzzle-piece" id="piece7" src="img/7.jpg" />
+              <img class="puzzle-piece" id="piece8" src="img/8.jpg" />
+              <img class="puzzle-piece" id="piece9" src="img/9.jpg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        // Generate a random index
+        var randomIndex = Math.floor(Math.random() * $(".puzzle-piece").length);
+
+        // Store the previously chosen piece
+        var previousPiece = null;
+
+        // Store the randomly chosen piece
+        var randomPiece = $(".puzzle-piece").eq(randomIndex);
+
+        // Animate all but one of the pieces to their respective places
+        $(".puzzle-piece").each(function (index) {
+          // Append  piece to right column's container
+          $(this).appendTo("#settled-puzzle-container");
+
+          if (index !== randomIndex) {
+            // Calculate target position
+            var targetRow = Math.floor(index / 3);
+            var targetCol = (index % 3) + 1;
+            var targetTop = targetRow * 150;
+            var targetLeft = targetCol * 150;
+
+            // Offset the target position by the center position of the container
+            var offsetTop = targetTop + 150;
+            var offsetLeft = targetLeft + 150;
+
+            // Reset the z-index of the previously chosen piece
+            if (previousPiece) {
+              previousPiece.css("z-index", "");
+            }
+
+            // Set the z-index of the randomly chosen piece to a high value
+            randomPiece.css("z-index", 9999);
+
+            // Store the randomly chosen piece as the previously chosen piece
+            previousPiece = randomPiece;
+
+            // Animate piece to offset position
+            $(this).animate(
+              {
+                top: offsetTop + "px",
+                left: offsetLeft + "px",
+              },
+              2000
+            );
+          } else {
+            // Reset the z-index of the previously chosen piece
+            if (previousPiece) {
+              previousPiece.css("z-index", "");
+            }
+
+            // Set the z-index of the randomly chosen piece to a high value
+            randomPiece.css("z-index", 9999);
+
+            // Store the randomly chosen piece as the previously chosen piece
+            previousPiece = randomPiece;
+            $(this).animate(
+              {
+                top: 150 + "px",
+                left: 150 + "px",
+              },
+              2000
+            );
+          }
+        });
+
+        // Event handlers
+        $("#up").click(function () {
+          var top = parseInt(randomPiece.css("top"));
+          randomPiece.animate({ top: top - 150 + "px" }, 500);
+        });
+
+        $("#down").click(function () {
+          var top = parseInt(randomPiece.css("top"));
+          randomPiece.animate({ top: top + 150 + "px" }, 500);
+        });
+
+        $("#left").click(function () {
+          var left = parseInt(randomPiece.css("left"));
+          randomPiece.animate({ left: left - 150 + "px" }, 500);
+        });
+
+        $("#right").click(function () {
+          var left = parseInt(randomPiece.css("left"));
+          randomPiece.animate({ left: left + 150 + "px" }, 500);
+        });
+      });
+    </script>
+  </body>
+</html>

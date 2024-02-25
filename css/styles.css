@@ -1,0 +1,32 @@
+#menu {
+  width: 200px;
+  background-color: #faf8f9;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+#menu li {
+  list-style-type: none;
+  border-top: 1px solid #dee2e6;
+}
+
+#menu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #495057;
+}
+
+#menu li a:hover {
+  background-color: #e9ecef;
+}
+
+#unsettled-puzzle-container {
+  position: relative;
+}
+
+.puzzle-piece {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+}

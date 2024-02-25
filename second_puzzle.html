@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Second Puzzle Page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+      .full-height {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 full-height p-5">
+          <ul id="menu">
+            <li><a href="first_puzzle.html">First Puzzle</a></li>
+            <li><a href="secnd_puzzle.html">Second Puzzle</a></li>
+          </ul>
+        </div>
+        <div id="puzzle-container" class="col-9 full-height p-5">
+          <img class="puzzle-piece" id="piece1" src="img/1.jpg" />
+          <img class="puzzle-piece" id="piece2" src="img/2.jpg" />
+          <img class="puzzle-piece" id="piece3" src="img/3.jpg" />
+          <img class="puzzle-piece" id="piece4" src="img/4.jpg" />
+          <img class="puzzle-piece" id="piece5" src="img/5.jpg" />
+          <img class="puzzle-piece" id="piece6" src="img/6.jpg" />
+          <img class="puzzle-piece" id="piece7" src="img/7.jpg" />
+          <img class="puzzle-piece" id="piece8" src="img/8.jpg" />
+          <img class="puzzle-piece" id="piece9" src="img/9.jpg" />
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $(".puzzle-piece").each(function () {
+          var top =
+            Math.random() *
+            ($("#puzzle-container").height() - $(this).height());
+          var left =
+            Math.random() * ($("#puzzle-container").width() - $(this).width());
+          $(this).css({ position: "absolute" });
+          $(this).animate({ top: top, left: left }, 2000);
+        });
+        $(".puzzle-piece").draggable();
+      });
+    </script>
+  </body>
+</html>
